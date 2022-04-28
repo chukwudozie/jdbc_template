@@ -12,7 +12,7 @@ public interface BookDao {
 
     Book updateBook(Book savedBook);
 
-    int getBookCount();
+    Integer getBookCount();
 
     void deleteById(Long id);
 }
