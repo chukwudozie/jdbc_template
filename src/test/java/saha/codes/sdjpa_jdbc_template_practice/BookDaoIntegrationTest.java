@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.EmptyResultDataAccessException;
 import saha.codes.sdjpa_jdbc_template_practice.dao.AuthorDao;
 import saha.codes.sdjpa_jdbc_template_practice.dao.BookDao;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Author;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Book;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
 @ComponentScan(basePackages = {"saha.codes.sdjpa_jdbc_template_practice.dao"})
@@ -32,7 +34,7 @@ public class BookDaoIntegrationTest {
 
     @Test
     public void testFindBookByTitle(){
-        Book book = bookDao.findByTitle("First Book");
+        Book book = bookDao.findByTitle("Clean Code");
         assertThat(book).isNotNull();
     }
 
@@ -63,17 +65,18 @@ public class BookDaoIntegrationTest {
     @Test
     public void testBookCount(){
         int count = bookDao.getBookCount();
+        System.out.println(count);
         assertThat(count).isGreaterThan(0);
     }
 
     @Test
     public void testDeleteBookById(){
-          Book testBook = new Book("test title", "123", "test publisher");
-       Book savedBook =bookDao.saveBook(testBook);
-       bookDao.deleteById(savedBook.getId());
-       Book fetchBook = bookDao.getById(savedBook.getId());
-       assertThat(fetchBook).isNull();
-
+        Book testBook = new Book("test title", "123", "test publisher");
+        Book savedBook =bookDao.saveBook(testBook);
+        bookDao.deleteById(savedBook.getId());
+        assertThrows(EmptyResultDataAccessException.class,() -> {
+            bookDao.getById(savedBook.getId());
+        });
     }
 
 }
