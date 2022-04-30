@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Author;
 
-@Component
+@Component(value = "authorDaoImpl")
 public class AuthorDaoImpl implements AuthorDao {
 
     private final JdbcTemplate template;
