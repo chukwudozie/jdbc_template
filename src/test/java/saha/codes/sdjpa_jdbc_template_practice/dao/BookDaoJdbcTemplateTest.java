@@ -10,6 +10,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Author;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Book;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -19,10 +21,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class BookDaoJdbcTemplateTest {
 
     @Autowired
-    @Qualifier(value = "bookDaoImpl")
+    @Qualifier(value = "bookDaoJDBCTemplate")
     private BookDao bookDao;
     @Autowired
     private AuthorDao authorDao;
+
+    @Test
+    void testFindAllBooks(){
+        List<Book> books = bookDao.findAllBooks();
+        assertThat(books).isNotNull();
+        assertThat(books.size()).isGreaterThan(4);
+    }
 
     @Test
     void testGetById(){
