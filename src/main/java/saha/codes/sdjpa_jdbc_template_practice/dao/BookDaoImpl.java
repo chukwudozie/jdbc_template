@@ -19,6 +19,11 @@ public class BookDaoImpl implements BookDao {
 
 
     @Override
+    public List<Book> findAllBooksSortByTitle(Pageable pageable) {
+        return new ArrayList<>();
+    }
+
+    @Override
     public List<Book> findAllBooks(Pageable pageable) {
         return new ArrayList<>(); // this method is fully implemented in BookDaoJDBCTemplate
     }

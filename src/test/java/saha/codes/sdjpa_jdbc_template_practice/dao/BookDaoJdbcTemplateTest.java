@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Author;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Book;
 
@@ -40,33 +41,33 @@ public class BookDaoJdbcTemplateTest {
     @Test
     void testFindAllBooksPage2(){
         List<Book>secondTenBooks = bookDao.findAllBooks(10,10);
-        secondTenBooks.forEach(book -> {
-            System.out.printf("Title : %s   Publisher: %s  ID : %d \n",
-                    book.getTitle(),book.getPublisher(),book.getId());
-        });
         assertThat(secondTenBooks).isNotNull();
         assertThat(secondTenBooks.size()).isEqualTo(10);
     }
     @Test
     void testFindAllBooksPage3(){
         List<Book>thirdTenBooks = bookDao.findAllBooks(10,20);
-        thirdTenBooks.forEach(book -> {
-            System.out.printf("Title : %s   Publisher: %s  ID : %d \n",
-                    book.getTitle(),book.getPublisher(),book.getId());
-        });
         assertThat(thirdTenBooks).isNotNull();
         assertThat(thirdTenBooks.size()).isEqualTo(0);
     }
 
     @Test
     void testFindAllBooksPage1_pageable(){
-        List<Book>firstTenBooks = bookDao.findAllBooks(PageRequest.of(1,10));
-        firstTenBooks.forEach(book -> {
+        List<Book>firstTenBooks = bookDao.findAllBooks(PageRequest.of(0,10));
+        assertThat(firstTenBooks).isNotNull();
+        assertThat(firstTenBooks.size()).isEqualTo(10);
+    }
+
+    @Test
+    void testFindAllBooksPage1_sortByTitle(){
+        List<Book>sortedBooks = bookDao.findAllBooksSortByTitle(PageRequest.of(0,10,
+                Sort.by(Sort.Order.desc("title"))));
+        sortedBooks.forEach(book -> {
             System.out.printf("Title : %s   Publisher: %s  ID : %d \n",
                     book.getTitle(),book.getPublisher(),book.getId());
         });
-        assertThat(firstTenBooks).isNotNull();
-        assertThat(firstTenBooks.size()).isEqualTo(10);
+        assertThat(sortedBooks).isNotNull();
+        assertThat(sortedBooks.size()).isEqualTo(10);
     }
 
     @Test
