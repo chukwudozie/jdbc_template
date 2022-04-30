@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component(value = "bookDaoImpl")
@@ -17,8 +18,13 @@ public class BookDaoImpl implements BookDao {
 
 
     @Override
+    public List<Book> findAllBooks(int pageSize, int offset) {
+        return new ArrayList<>(); // this method is fully implemented in BookDaoJDBCTemplate
+    }
+
+    @Override
     public List<Book> findAllBooks() {
-        return null;
+        return new ArrayList<>(); // this method is fully implemented in BookDaoJDBCTemplate
     }
 
     @Override

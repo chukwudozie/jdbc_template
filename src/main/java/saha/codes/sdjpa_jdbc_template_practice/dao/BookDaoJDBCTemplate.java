@@ -15,6 +15,17 @@ public class BookDaoJDBCTemplate implements BookDao{
         this.template = template;
     }
 
+    /**
+     *
+     * @param pageSize the number of books in the one page
+     * @param offset the number of rows to be skipped
+     * @return List of books with size pageSize
+     */
+    @Override
+    public List<Book> findAllBooks(int pageSize, int offset) {
+        return null;
+    }
+
     @Override
     public List<Book> findAllBooks() {
         return template.query("SELECT * FROM book",getBookMapper());
