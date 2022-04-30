@@ -1,9 +1,14 @@
 package saha.codes.sdjpa_jdbc_template_practice.dao;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Author;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component(value = "authorDaoImpl")
 public class AuthorDaoImpl implements AuthorDao {
@@ -19,6 +24,12 @@ public class AuthorDaoImpl implements AuthorDao {
         String sql = "select author.id as id, first_name, last_name, book.id as book_id, book.isbn, book.publisher," +
           " book.title from author left outer join book on author.id = book.author_id where author.id = ?";
         return template.query(sql, new AuthorExtractor(),id);
+    }
+
+
+    @Override
+    public List<Author> findAllAuthorsByLastName(String lastName, Pageable pageable) {
+        return null;
     }
 
     @Override
