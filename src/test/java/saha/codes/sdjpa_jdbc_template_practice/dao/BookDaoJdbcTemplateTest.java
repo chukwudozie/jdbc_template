@@ -29,20 +29,32 @@ public class BookDaoJdbcTemplateTest {
     @Test
     void testFindAllBooksPage1(){
         List<Book>firstTenBooks = bookDao.findAllBooks(10,0);
+        firstTenBooks.forEach(book -> {
+            System.out.printf("Title : %s   Publisher: %s  ID : %d \n",
+                    book.getTitle(),book.getPublisher(),book.getId());
+        });
         assertThat(firstTenBooks).isNotNull();
         assertThat(firstTenBooks.size()).isEqualTo(10);
     }
     @Test
     void testFindAllBooksPage2(){
-        List<Book>secondTenBooks = bookDao.findAllBooks(10,2);
+        List<Book>secondTenBooks = bookDao.findAllBooks(10,10);
+        secondTenBooks.forEach(book -> {
+            System.out.printf("Title : %s   Publisher: %s  ID : %d \n",
+                    book.getTitle(),book.getPublisher(),book.getId());
+        });
         assertThat(secondTenBooks).isNotNull();
         assertThat(secondTenBooks.size()).isEqualTo(10);
     }
     @Test
     void testFindAllBooksPage3(){
-        List<Book>thirdTenBooks = bookDao.findAllBooks(10,3);
+        List<Book>thirdTenBooks = bookDao.findAllBooks(10,20);
+        thirdTenBooks.forEach(book -> {
+            System.out.printf("Title : %s   Publisher: %s  ID : %d \n",
+                    book.getTitle(),book.getPublisher(),book.getId());
+        });
         assertThat(thirdTenBooks).isNotNull();
-        assertThat(thirdTenBooks.size()).isEqualTo(10);
+        assertThat(thirdTenBooks.size()).isEqualTo(0); 
     }
 
     @Test
