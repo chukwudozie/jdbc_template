@@ -1,4 +1,4 @@
-package saha.codes.sdjpa_jdbc_template_practice;
+package saha.codes.sdjpa_jdbc_template_practice.dao;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,9 @@
-package saha.codes.sdjpa_jdbc_template_practice;
+package saha.codes.sdjpa_jdbc_template_practice.dao;
 
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class BookDaoIntegrationTest {
 
     @Autowired
+    @Qualifier(value = "bookDaoImpl")
     private BookDao bookDao;
 
     @Autowired
