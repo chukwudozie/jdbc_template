@@ -6,7 +6,7 @@ import saha.codes.sdjpa_jdbc_template_practice.domain.Book;
 
 import java.util.List;
 
-@Component
+@Component(value = "bookDaoJDBCTemplate")
 public class BookDaoJDBCTemplate implements BookDao{
 
     private final JdbcTemplate template;
