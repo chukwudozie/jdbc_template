@@ -27,6 +27,27 @@ public class BookDaoJdbcTemplateTest {
     private AuthorDao authorDao;
 
     @Test
+    void testFindAllBooksPage1(){
+        List<Book>firstFiveBooks = bookDao.findAllBooks(5,0);
+        assertThat(firstFiveBooks).isNotNull();
+        assertThat(firstFiveBooks.size()).isEqualTo(10);
+    }
+    @Test
+    void testFindAllBooksPage2(){
+        List<Book>secondFiveBooks = bookDao.findAllBooks(5,2);
+        assertThat(secondFiveBooks).isNotNull();
+        assertThat(secondFiveBooks.size()).isEqualTo(10);
+    }
+
+    @Test
+    void testFindAllBooksPage10(){
+        List<Book>booksOutOfRange = bookDao.findAllBooks(5,30);
+        assertThat(booksOutOfRange).isNotNull();
+        assertThat(booksOutOfRange.size()).isEqualTo(10);
+    }
+
+
+    @Test
     void testFindAllBooks(){
         List<Book> books = bookDao.findAllBooks();
         assertThat(books).isNotNull();
