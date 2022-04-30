@@ -3,7 +3,7 @@ package saha.codes.sdjpa_jdbc_template_practice.dao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Book;
-
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Component(value = "bookDaoJDBCTemplate")
@@ -13,6 +13,13 @@ public class BookDaoJDBCTemplate implements BookDao{
 
     public BookDaoJDBCTemplate(JdbcTemplate template) {
         this.template = template;
+    }
+
+
+    @Override
+    public List<Book> findAllBooks(Pageable pageable) {
+        return template.query("SELECT * FROM book limit ? offset ?",getBookMapper(),
+                pageable.getPageSize(),pageable.getOffset());
     }
 
     /**

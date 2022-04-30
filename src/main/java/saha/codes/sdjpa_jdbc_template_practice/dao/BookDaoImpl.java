@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Book;
 
+import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,11 @@ public class BookDaoImpl implements BookDao {
         this.template = template;
     }
 
+
+    @Override
+    public List<Book> findAllBooks(Pageable pageable) {
+        return new ArrayList<>(); // this method is fully implemented in BookDaoJDBCTemplate
+    }
 
     @Override
     public List<Book> findAllBooks(int pageSize, int offset) {
