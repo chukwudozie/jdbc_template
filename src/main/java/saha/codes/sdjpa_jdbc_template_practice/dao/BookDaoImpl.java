@@ -5,7 +5,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import saha.codes.sdjpa_jdbc_template_practice.domain.Book;
 
-@Component
+import java.util.List;
+
+@Component(value = "bookDaoImpl")
 public class BookDaoImpl implements BookDao {
 
     private final JdbcTemplate template;
@@ -14,6 +16,10 @@ public class BookDaoImpl implements BookDao {
     }
 
 
+    @Override
+    public List<Book> findAllBooks() {
+        return null;
+    }
 
     @Override
     public Book getById(Long id) {
