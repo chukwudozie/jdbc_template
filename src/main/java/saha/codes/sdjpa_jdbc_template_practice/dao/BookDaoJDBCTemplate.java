@@ -23,7 +23,7 @@ public class BookDaoJDBCTemplate implements BookDao{
      */
     @Override
     public List<Book> findAllBooks(int pageSize, int offset) {
-        return null;
+        return template.query("SELECT * FROM book limit ? offset ?",getBookMapper(),pageSize,offset);
     }
 
     @Override
